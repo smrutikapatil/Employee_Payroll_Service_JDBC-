@@ -1,8 +1,8 @@
 package com.employee_Payroll_Service;
 
-public class PayrollServiceException extends Exception {
+public class PayrollServiceException extends Exception{
     enum ExceptionType{
-        CONNECTION_PROBLEM, RETRIEVAL_PROBLEM;
+        CONNECTION_PROBLEM, RETRIEVAL_PROBLEM, UPDATE_PROBLEM;
     }
 
     ExceptionType type;
@@ -11,4 +11,3 @@ public class PayrollServiceException extends Exception {
         this.type = type;
     }
 }
-
