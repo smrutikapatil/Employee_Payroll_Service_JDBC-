@@ -1,9 +1,12 @@
 package com.employee_Payroll_Service;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+
 public class EmployeePayrollService {
 	public enum IOService {
 		CONSOLE_IO, FILE_IO, DB_IO, REST_IO
@@ -81,14 +84,45 @@ public class EmployeePayrollService {
 				.filter(employeePayrollDataItem -> employeePayrollDataItem.name.equals(name)).findFirst().orElse(null);
 		return employeePayrollData;
 	}
-
 	public boolean checkEmployeePayrollInSyncWithDB(String name) {
 		List<EmployeePayrollData> employeePayrollDataList = employeePayrollDBService.getEmployeePayrollData(name);
 		return employeePayrollDataList.get(0).equals(getEmployeePayrollData(name));
 	}
-	public List<EmployeePayrollData> readEmployeePayrollForDateRange(IOService dbIo, LocalDate startDate,
-																	 LocalDate endDate) {
-		// TODO Auto-generated method stub
+	public List<EmployeePayrollData> readEmployeePayrollForDateRange(IOService ioService, LocalDate startDate,
+																	 LocalDate endDate) throws PayrollServiceException {
+		if(ioService.equals(IOService.DB_IO))
+			return employeePayrollDBService.getEmployeeForDateRange(startDate, endDate);
+
+		return null;
+	}
+
+	public Map<String, Double> readAverageSalaryByGender(IOService ioService) throws PayrollServiceException {
+		if (ioService.equals(IOService.DB_IO))
+			return employeePayrollDBService.getAverageSalaryByGender();
+		return null;
+	}
+
+	public Map<String, Double> readCountByGender(IOService ioService) throws PayrollServiceException {
+		if (ioService.equals(IOService.DB_IO))
+			return employeePayrollDBService.getCountByGender();
+		return null;
+	}
+
+	public Map<String, Double> readMinumumSalaryByGender(IOService ioService) {
+		if (ioService.equals(IOService.DB_IO))
+			return employeePayrollDBService.getMinimumByGender();
+		return null;
+	}
+
+	public Map<String, Double> readMaximumSalaryByGender(IOService ioService) {
+		if (ioService.equals(IOService.DB_IO))
+			return employeePayrollDBService.getMaximumByGender();
+		return null;
+	}
+
+	public Map<String, Double> readSumSalaryByGender(IOService ioService) {
+		if (ioService.equals(IOService.DB_IO))
+			return employeePayrollDBService.getSalarySumByGender();
 		return null;
 	}
 }

@@ -1,9 +1,8 @@
 package com.employee_Payroll_Service;
 
 import java.time.LocalDate;
+
 public class EmployeePayrollData {
-
-
     public int id;
     public String name;
     public double salary;
