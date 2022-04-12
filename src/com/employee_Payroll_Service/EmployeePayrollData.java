@@ -1,7 +1,6 @@
 package com.employee_Payroll_Service;
 
 import java.time.LocalDate;
-
 public class EmployeePayrollData {
 
 
